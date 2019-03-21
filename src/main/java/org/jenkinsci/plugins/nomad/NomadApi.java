@@ -22,10 +22,13 @@ public final class NomadApi {
 
     private final String nomadApi;
 
+    private final String nomadAcl;
+
     public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
-    public NomadApi(String nomadApi) {
+    public NomadApi(String nomadApi, String nomadAcl) {
         this.nomadApi = nomadApi;
+        this.nomadAcl = nomadAcl;
     }
 
     public void startSlave(String slaveName, String jnlpSecret, NomadSlaveTemplate template) {
@@ -41,6 +44,7 @@ public final class NomadApi {
         try {
             RequestBody body = RequestBody.create(JSON, slaveJob);
             Request request = new Request.Builder()
+                    .addHeader("X-Nomad-Token", nomadAcl)
                     .url(this.nomadApi + "/v1/job/" + slaveName + "?region=" + template.getRegion())
                     .put(body)
                     .build();
@@ -55,6 +59,7 @@ public final class NomadApi {
     public void stopSlave(String slaveName) {
 
         Request request = new Request.Builder()
+                .addHeader("X-Nomad-Token", nomadAcl)
                 .url(this.nomadApi + "/v1/job/" + slaveName)
                 .delete()
                 .build();

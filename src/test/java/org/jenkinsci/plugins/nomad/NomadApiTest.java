@@ -12,7 +12,7 @@ import static org.junit.Assert.assertTrue;
  */
 public class NomadApiTest {
 
-    private NomadApi nomadApi = new NomadApi("http://localhost");
+    private NomadApi nomadApi = new NomadApi("http://localhost", "TOKEN");
     private NomadSlaveTemplate slaveTemplate = new NomadSlaveTemplate(
             "300", "256", "100",
             null, "remoteFs", "3","1", Node.Mode.NORMAL,
@@ -23,6 +23,7 @@ public class NomadApiTest {
             "nomad",
             "nomadUrl",
             "jenkinsUrl",
+            "jenkinsAcl",
             "slaveUrl",
             Collections.singletonList(slaveTemplate));
 

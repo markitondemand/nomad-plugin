@@ -28,6 +28,7 @@ public class NomadCloud extends AbstractCloudImpl {
     private final List<? extends NomadSlaveTemplate> templates;
     private final String name;
     private final String nomadUrl;
+    private final String nomadAcl;
     private String jenkinsUrl;
     private String slaveUrl;
     private NomadApi nomad;
@@ -37,6 +38,7 @@ public class NomadCloud extends AbstractCloudImpl {
     public NomadCloud(
             String name,
             String nomadUrl,
+            String nomadAcl,
             String jenkinsUrl,
             String slaveUrl,
             List<? extends NomadSlaveTemplate> templates)
@@ -45,6 +47,7 @@ public class NomadCloud extends AbstractCloudImpl {
 
         this.name = name;
         this.nomadUrl = nomadUrl;
+        this.nomadAcl = nomadAcl;
         this.jenkinsUrl = jenkinsUrl;
         this.slaveUrl = slaveUrl;
 
@@ -61,7 +64,7 @@ public class NomadCloud extends AbstractCloudImpl {
         for (NomadSlaveTemplate template : this.templates) {
             template.setCloud(this);
         }
-        nomad = new NomadApi(nomadUrl);
+        nomad = new NomadApi(nomadUrl, nomadAcl);
 
         if (jenkinsUrl.equals("")) {
             jenkinsUrl = Jenkins.getInstance().getRootUrl();

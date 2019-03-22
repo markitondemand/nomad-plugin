@@ -11,7 +11,7 @@
   </f:entry>
 
   <f:entry title="Nomad ACL" field="nomadAcl" description="ACL token (SecretID) passed to Nomad for all operations">
-    <f:textbox />
+    <f:textbox default="" />
   </f:entry>
 
   <f:entry title="Jenkins Base URL" field="jenkinsUrl" description="Jenkins base URL">

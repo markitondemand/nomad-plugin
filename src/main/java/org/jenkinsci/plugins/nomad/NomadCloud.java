@@ -237,6 +237,9 @@ public class NomadCloud extends AbstractCloudImpl {
     public String getNomadUrl() {
         return nomadUrl;
     }
+    public String getNomadAcl() {
+        return nomadAcl;
+    }
     public String getJenkinsUrl() {
         return jenkinsUrl;
     }
